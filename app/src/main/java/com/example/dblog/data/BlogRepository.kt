@@ -18,9 +18,10 @@ class BlogRepository(application: Application ) {
         allBlogs = blogDao.getAllNotes()
     }
     fun insert(blog: Blog){
-        val insertBlogAsyncTask = InsertBlogAsyncTask(blogDao).execute(blog)
+        val insertBlogAsyncTask = InsertBlogAsyncTask(blog).execute(blog)
     }
     fun update(blog: Blog){
+        val updateBlogAsyncTask = UpdateBlogAsyncTask(blog).execute(blog)
     }
     fun delete(blog: Blog){
     }
@@ -31,7 +32,15 @@ class BlogRepository(application: Application ) {
 
     companion object{
         private class InsertBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
-            val blogDao: BlogDao
+            lateinit var blogDao: BlogDao
+
+            override fun doInBackground(vararg p0: Blog?) {
+                blogDao.insert(p0[0]!!)
+            }
+        }
+
+        private class UpdateBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
+            lateinit var blogDao: BlogDao
 
             override fun doInBackground(vararg p0: Blog?) {
                 blogDao.insert(p0[0]!!)
