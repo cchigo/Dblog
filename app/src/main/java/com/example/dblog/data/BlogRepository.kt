@@ -27,11 +27,12 @@ class BlogRepository(application: Application ) {
         val deleteBlogAsyncTask = DeleteBlogAsyncTask(blog).execute()
 
     }
-    fun deleteAllBlogs(blog: Blog){
-        val deleteBlogAsyncTask = DeleteBlogAsyncTask(blog).execute()
+    fun deleteAllBlogs(){
+        val deleteAllBlogAsyncTask = DeleteAllBlogAsyncTask().execute()
+
     }
-    fun getAllBlogs(blog: Blog){
-       val deleteAllBlogAsyncTask = DeleteAllBlogAsyncTask(blog).execute()
+    fun getAllBlogs():LiveData<List<Blog>> {
+       return allBlogs
     }
 
     companion object{
@@ -60,11 +61,11 @@ class BlogRepository(application: Application ) {
             }
         }
 
-        private class DeleteAllBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
+        private class DeleteAllBlogAsyncTask() : AsyncTask<Blog, Unit, Unit>(){
             lateinit var blogDao: BlogDao
 
             override fun doInBackground(vararg p0: Blog?) {
-                blogDao.deleteAllBlogs(p0[0]!!)
+                blogDao.deleteAllBlogs()
             }
         }
 

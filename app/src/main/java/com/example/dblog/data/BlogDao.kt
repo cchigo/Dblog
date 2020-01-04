@@ -16,7 +16,7 @@ interface BlogDao {
     fun delete(blog: Blog)
 
     @Query("DELETE FROM blog_table")
-    fun deleteAllBlogs(blog: Blog)
+    fun deleteAllBlogs()
 
     @Query("SELECT * FROM blog_table")
     fun getAllNotes(): LiveData<List<Blog>>
