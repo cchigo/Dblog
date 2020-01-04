@@ -21,15 +21,17 @@ class BlogRepository(application: Application ) {
         val insertBlogAsyncTask = InsertBlogAsyncTask(blog).execute(blog)
     }
     fun update(blog: Blog){
-        val updateBlogAsyncTask = UpdateBlogAsyncTask(blog).execute(blog)
+        val updateBlogAsyncTask = UpdateBlogAsyncTask(blog).execute()
     }
     fun delete(blog: Blog){
-        val deleteBlogAsyncTask = DeleteBlogAsyncTask(blog).execute(blog)
+        val deleteBlogAsyncTask = DeleteBlogAsyncTask(blog).execute()
 
     }
-    fun deleteAllNotes(blog: Blog){
+    fun deleteAllBlogs(blog: Blog){
+        val deleteBlogAsyncTask = DeleteBlogAsyncTask(blog).execute()
     }
-    fun getAllNotes(blog: Blog){
+    fun getAllBlogs(blog: Blog){
+       val deleteAllBlogAsyncTask = DeleteAllBlogAsyncTask(blog).execute()
     }
 
     companion object{
@@ -46,7 +48,7 @@ class BlogRepository(application: Application ) {
             lateinit var blogDao: BlogDao
 
             override fun doInBackground(vararg p0: Blog?) {
-                blogDao.insert(p0[0]!!)
+                blogDao.update(p0[0]!!)
             }
         }
 
@@ -54,9 +56,18 @@ class BlogRepository(application: Application ) {
             lateinit var blogDao: BlogDao
 
             override fun doInBackground(vararg p0: Blog?) {
-                blogDao.insert(p0[0]!!)
+                blogDao.delete(p0[0]!!)
             }
         }
+
+        private class DeleteAllBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
+            lateinit var blogDao: BlogDao
+
+            override fun doInBackground(vararg p0: Blog?) {
+                blogDao.deleteAllBlogs(p0[0]!!)
+            }
+        }
+
 
     }
 
