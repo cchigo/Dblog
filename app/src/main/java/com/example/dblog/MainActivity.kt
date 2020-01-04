@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //this references the viewmodel
         blogViewModel = ViewModelProviders.of(this).get(BlogViewModel::class.java)
 
         blogViewModel!!.getAllBlogs().observe(this, object : Observer<List<Blog>>{
