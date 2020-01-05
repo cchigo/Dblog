@@ -3,6 +3,7 @@ package com.example.dblog.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dblog.R
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.blog_item.view.*
 
 class BlogAdapter: RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
     private var blogs: List<Blog> = ArrayList<Blog>()
-
+   // private var listener: AdapterView.OnItemClickListener? = null
     //holds views in each recyclerview item
 
     class BlogHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
