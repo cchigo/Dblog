@@ -20,6 +20,7 @@ class BlogAdapter: RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
        var textViewCategory : TextView = itemView.text_view_category
         var textViewContent : TextView = itemView.text_view_content
 
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogHolder {
@@ -46,4 +47,7 @@ class BlogAdapter: RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
     override fun getItemCount(): Int {
         return blogs.size
     }
+
+
+
 }

@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.lifecycle.AndroidViewModel
@@ -16,6 +19,7 @@ import com.example.dblog.adapters.BlogAdapter
 import com.example.dblog.data.Blog
 import com.example.dblog.viewmodels.BlogViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.blog_item.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, ADD_BLOG_REQUEST)
             }
         })
+
+
 
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
@@ -91,4 +97,59 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Article not saved", Toast.LENGTH_LONG).show()
         }
     }
-}
+
+    fun showPopup(v: View) {
+        //var popup = PopupMenu(this, v)
+//        val inflater: MenuInflater = popup.menuInflater
+//        inflater.inflate(R.menu.options_menu, popup.menu)
+//        popup.show()
+
+            var popupMenu = PopupMenu(this, v)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when(item.itemId){
+                    R.id.edit -> {
+                        Toast.makeText(this, "edit", Toast.LENGTH_LONG).show()
+                        true
+                    }
+                    R.id.delete -> {
+                        Toast.makeText(this, "delete", Toast.LENGTH_LONG).show()
+                        true
+                    }
+                    else -> false
+                }
+
+            }
+            popupMenu.inflate(R.menu.options_menu)
+            popupMenu.show()
+        }
+    }
+
+
+
+
+////    fun showMenu(v: View) {
+////        PopupMenu(this, v).apply {
+////            // MainActivity implements OnMenuItemClickListener
+////            setOnMenuItemClickListener(this@MainActivity)
+////            inflate(R.menu.options_menu)
+////            show()
+////        }
+////    }
+//
+//    override fun onMenuItemClick(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.edit -> {
+//
+//                archive(item)
+//
+//                true
+//            }
+//            R.id.delete -> {
+//                delete(item)
+//                true
+//            }
+//            else -> false
+//        }
+//    }
+
+

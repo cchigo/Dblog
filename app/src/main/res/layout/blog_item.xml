@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -13,13 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/text_view_priority"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_alignParentEnd="true"-->
-        <!--            android:text="1"-->
-        <!--            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>-->
+
 
         <TextView
             android:id="@+id/text_view_title"
@@ -44,6 +40,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_category"
             android:text="This is the blog Content" />
+
+        <ImageView
+            android:id="@+id/moreOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="8dp"
+            android:onClick="showPopup"
+            android:text="&#8942;"
+            android:src="@drawable/ic_more"
+            android:clickable="true"
+            android:textAppearance="?android:textAppearanceLarge" />
 
     </RelativeLayout>
 
