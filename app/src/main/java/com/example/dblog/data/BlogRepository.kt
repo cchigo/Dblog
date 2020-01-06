@@ -24,7 +24,7 @@ class BlogRepository(application: Application ) {
         val updateBlogAsyncTask = UpdateBlogAsyncTask(blogDao).execute(blog)
     }
     fun delete(blog: Blog){
-        val deleteBlogAsyncTask = DeleteBlogAsyncTask(blog).execute()
+        val deleteBlogAsyncTask = DeleteBlogAsyncTask(blogDao).execute(blog)
 
     }
     fun deleteAllBlogs(){
@@ -55,8 +55,8 @@ class BlogRepository(application: Application ) {
         }
     }
 
-    private class DeleteBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
-        lateinit var blogDao: BlogDao
+    private class DeleteBlogAsyncTask(val blogDao: BlogDao) : AsyncTask<Blog, Unit, Unit>(){
+
 
         override fun doInBackground(vararg p0: Blog?) {
             blogDao.delete(p0[0]!!)
