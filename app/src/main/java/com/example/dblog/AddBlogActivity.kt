@@ -20,30 +20,22 @@ class AddBlogActivity : AppCompatActivity() {
         const val EXTRA_CONTENT = "com.example.dblog.EXTRA_CONTENT"
     }
 
-//
-//    lateinit var  editTextTitle: EditText
-//    lateinit var  editTextCategory:  EditText
-//    lateinit var  editTextContent: EditText
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_blog)
 
-//        editTextTitle = edit_text_title
-//        editTextCategory = edit_text_category
-//        editTextContent = edit_text_content
 
         //to display close button
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
         //setTitle("Write a new blogpost")
 
         if(intent.hasExtra(EXTRA_ID)){
-            title = "Write a new blogpost"
+            title = "Edit Blog"
             edit_text_title.setText(intent.getStringExtra(EXTRA_TITLE))
             edit_text_category.setText(intent.getStringExtra(EXTRA_CATEGORY))
             edit_text_content.setText(intent.getStringExtra(EXTRA_CONTENT))
         } else {
-            title = "Add Note"
+            title = "Write New Blog"
         }
     }
     //specify menu for this activity
