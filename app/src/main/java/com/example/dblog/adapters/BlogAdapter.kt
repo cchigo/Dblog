@@ -35,7 +35,7 @@ class BlogAdapter : RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
     }
 
     fun getBlogAt(position: Int): Blog {
-        return blogs.get(position)
+        return blogs[position]
 
 
     }

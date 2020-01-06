@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 
 class BlogRepository(application: Application ) {
 
-     var blogDao: BlogDao
+    var blogDao: BlogDao
 
     private var allBlogs: LiveData<List<Blog>>
 
@@ -32,42 +32,42 @@ class BlogRepository(application: Application ) {
 
     }
     fun getAllBlogs():LiveData<List<Blog>> {
-       return allBlogs
+        return allBlogs
     }
 
 
 
-        private class InsertBlogAsyncTask(val blogDao: BlogDao) : AsyncTask<Blog, Unit, Unit>(){
+    private class InsertBlogAsyncTask(val blogDao: BlogDao) : AsyncTask<Blog, Unit, Unit>(){
 
 
 
-            override fun doInBackground(vararg p0: Blog?) {
-                blogDao.insert(p0[0]!!)
-            }
+        override fun doInBackground(vararg p0: Blog?) {
+            blogDao.insert(p0[0]!!)
         }
+    }
 
-        private class UpdateBlogAsyncTask(val blogDao: BlogDao) : AsyncTask<Blog, Unit, Unit>(){
+    private class UpdateBlogAsyncTask(val blogDao: BlogDao) : AsyncTask<Blog, Unit, Unit>(){
 
 
-            override fun doInBackground(vararg p0: Blog?) {
+        override fun doInBackground(vararg p0: Blog?) {
 
-                blogDao.update(p0[0]!!)
-            }
+            blogDao.update(p0[0]!!)
         }
+    }
 
-        private class DeleteBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
-            lateinit var blogDao: BlogDao
+    private class DeleteBlogAsyncTask(blog: Blog) : AsyncTask<Blog, Unit, Unit>(){
+        lateinit var blogDao: BlogDao
 
-            override fun doInBackground(vararg p0: Blog?) {
-                blogDao.delete(p0[0]!!)
-            }
+        override fun doInBackground(vararg p0: Blog?) {
+            blogDao.delete(p0[0]!!)
         }
+    }
 
-        private class DeleteAllBlogAsyncTask() : AsyncTask<Blog, Unit, Unit>(){
-            lateinit var blogDao: BlogDao
+    private class DeleteAllBlogAsyncTask() : AsyncTask<Blog, Unit, Unit>(){
+        lateinit var blogDao: BlogDao
 
-            override fun doInBackground(vararg p0: Blog?) {
-                blogDao.deleteAllBlogs()
-            }
+        override fun doInBackground(vararg p0: Blog?) {
+            blogDao.deleteAllBlogs()
         }
+    }
 }

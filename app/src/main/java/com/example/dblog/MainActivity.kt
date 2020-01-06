@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -57,8 +58,8 @@ class MainActivity : AppCompatActivity() {
         blogViewModel = ViewModelProviders.of(this).get(BlogViewModel::class.java)
 
         blogViewModel.getAllBlogs().observe(this, object:Observer<List<Blog>> {
-            override fun onChanged(blogs:List<Blog>?) {
-                adapter.setBlog(blogs!!)
+            override fun onChanged(blogs:List<Blog>) {
+                adapter.setBlog(blogs)
             }
         })
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         adapter.setOnItemClickListener(object : BlogAdapter.OnItemClickListener{
             override fun onItemClick(blog: Blog) {
+                Toast.makeText(applicationContext, "${blog.id}", Toast.LENGTH_SHORT).show()
                 var intent = Intent(baseContext, AddBlogActivity::class.java)
                 intent.putExtra(AddBlogActivity.EXTRA_ID, blog.id)
                 intent.putExtra(AddBlogActivity.EXTRA_TITLE, blog.title)
@@ -95,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.delete_all_blogs -> {
                 blogViewModel.deleteAllBlogs()
@@ -123,21 +125,26 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Your Article has bee posted", Toast.LENGTH_LONG).show()
 
-        //edits the blog
+            //edits the blog
 
 
         } else if(requestCode == EDIT_BLOG_REQUEST && resultCode == Activity.RESULT_OK){
-            val id = data?.getIntExtra(AddBlogActivity.EXTRA_ID, -1)
+            val id = data?.getIntExtra(AddBlogActivity.EXTRA_ID, 1)
 
-            if(id == -1){
-                Toast.makeText(this, "Could not update! Error!", Toast.LENGTH_SHORT).show()
-            }
+//           if(id == -1){
+//               Toast.makeText(this, "Could not update! Error!", Toast.LENGTH_SHORT).show()
+//            }
             val updateBlog = Blog(
                 data!!.getStringExtra(AddBlogActivity.EXTRA_CATEGORY),
                 data.getStringExtra(AddBlogActivity.EXTRA_TITLE),
                 data.getStringExtra(AddBlogActivity.EXTRA_CONTENT)
             )
-            updateBlog.id = data.getIntExtra(AddBlogActivity.EXTRA_ID, -1)
+            id?.let {
+                updateBlog.id = it
+            }
+            Log.i("Blogid", "$id")
+            Toast.makeText(applicationContext, "$id", Toast.LENGTH_SHORT).show()
+
             blogViewModel.update(updateBlog)
 
 
@@ -151,8 +158,4 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    }
-
-
-
-
+}

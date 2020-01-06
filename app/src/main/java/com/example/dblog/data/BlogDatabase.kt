@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Blog::class], version = 2, exportSchema = false)
+@Database(entities = [Blog::class], version = 3, exportSchema = false)
 abstract class BlogDatabase: RoomDatabase() {
 
     abstract fun blogDao(): BlogDao
@@ -48,12 +48,12 @@ abstract class BlogDatabase: RoomDatabase() {
         private val blogDao = db?.blogDao()
 
         override fun doInBackground(vararg params: Unit?) {
-            blogDao?.insert(Blog("category1", "title1", "content1"))
-            blogDao?.insert(Blog("category2", "title2", "content2"))
-            blogDao?.insert(Blog("category3", "title3", "content3"))
-            blogDao?.insert(Blog("category4", "title4", "content4"))
-            blogDao?.insert(Blog("category5", "title5", "content5"))
-            blogDao?.insert(Blog("category6", "title6", "content6"))
+//            blogDao?.insert(Blog("category1", "title1", "content1"))
+//            blogDao?.insert(Blog("category2", "title2", "content2"))
+//            blogDao?.insert(Blog("category3", "title3", "content3"))
+//            blogDao?.insert(Blog("category4", "title4", "content4"))
+//            blogDao?.insert(Blog("category5", "title5", "content5"))
+//            blogDao?.insert(Blog("category6", "title6", "content6"))
             }
     }
 

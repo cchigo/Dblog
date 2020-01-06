@@ -55,37 +55,28 @@ class AddBlogActivity : AppCompatActivity() {
     }
 
 
-        private fun postNote(){
-            if (edit_text_category.text.toString().trim().isBlank() ||
-                edit_text_title.text.toString().trim().isBlank() ||
+    private fun postNote(){
+        if (edit_text_category.text.toString().trim().isBlank() ||
+            edit_text_title.text.toString().trim().isBlank() ||
 
-                edit_text_content.text.toString().trim().isBlank() ){
+            edit_text_content.text.toString().trim().isBlank() ){
 
-                Toast.makeText(this, "You can not send an empty blogpost!", Toast.LENGTH_LONG).show()
-                return
-            }
-            val data = Intent().apply {
-                putExtra(EXTRA_TITLE, edit_text_title.text.toString())
-                putExtra(EXTRA_CATEGORY, edit_text_category.text.toString())
-                putExtra(EXTRA_CONTENT, edit_text_content.text.toString())
-
-                if (intent.getIntExtra(EXTRA_ID, -1) !=1){
-                    putExtra(EXTRA_ID, intent.getIntExtra(EXTRA_ID, -1))
-                }
-
-            }
-            setResult(Activity.RESULT_OK, data)
-            finish()
+            Toast.makeText(this, "You can not send an empty blogpost!", Toast.LENGTH_LONG).show()
+            return
         }
+        val data = Intent().apply {
+            putExtra(EXTRA_TITLE, edit_text_title.text.toString())
+            putExtra(EXTRA_CATEGORY, edit_text_category.text.toString())
+            putExtra(EXTRA_CONTENT, edit_text_content.text.toString())
 
+            if (intent.getIntExtra(EXTRA_ID, -1) !=1){
+                putExtra(EXTRA_ID, intent.getIntExtra(EXTRA_ID, -1))
+            }
 
+        }
+        setResult(Activity.RESULT_OK, data)
+        finish()
     }
 
 
-
-
-
-
-
-
-
+}
