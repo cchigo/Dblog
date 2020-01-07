@@ -10,6 +10,7 @@ data class Blog(
     var title: String?,
 
     var content: String?
+
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

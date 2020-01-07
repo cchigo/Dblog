@@ -8,10 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
+import android.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_add_blog.*
 
 class AddBlogActivity : AppCompatActivity() {
 
+    private lateinit var toolbar: Toolbar
     //intent extra keys
     companion object {
         const val EXTRA_ID = "com.example.dblog.EXTRA_ID"
@@ -37,7 +39,22 @@ class AddBlogActivity : AppCompatActivity() {
         } else {
             title = "Write New Blog"
         }
+
+//        app_toolbar.setOnMenuItemClickListener{
+//            when(it.itemId){
+//                R.id.post_note ->{
+//                    postNote()
+//                    Toast.makeText(applicationContext, "posted", Toast.LENGTH_LONG).show()
+//                    true
+//                }
+//
+//
+//
+//            }
+//            true
+//        }
     }
+
     //specify menu for this activity
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_blog_menu, menu)
@@ -53,6 +70,9 @@ class AddBlogActivity : AppCompatActivity() {
             else ->  super.onOptionsItemSelected(item)
         }
     }
+
+
+
 
 
     private fun postNote(){
@@ -77,6 +97,7 @@ class AddBlogActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK, data)
         finish()
     }
+
 
 
 }

@@ -1,33 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <EditText
-        android:id="@+id/edit_text_title"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title"
-        android:inputType="text"/>
+        android:id="@+id/app_bar_layout"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <EditText
-        android:id="@+id/edit_text_category"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:contentScrim="@color/mainBackground"
+            app:menu="@menu/add_blog_menu"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:srcCompat="@drawable/ic_create_post_illustration"
+                />
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/app_toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                -->
+<!--                android:popupTheme="@style/ThemeOverlay.AppCompat.Dark">-->
+
+<!--            </androidx.appcompat.widget.Toolbar>-->
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Category"
-        android:inputType="textMultiLine"/>
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
 
-    <EditText
-        android:id="@+id/edit_text_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Content"
-        android:inputType="textMultiLine"/>
+            android:background="@color/mainBackground"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/edit_text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title"
+                android:textColorHint="@color/hintColor"
+                android:textColor="@color/contentFont"
+                android:backgroundTint="@color/hintColor"
+                android:textSize="30sp"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/edit_text_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Category"
+                android:textColorHint="@color/hintColor"
+                android:textColor="@color/contentFont"
+                android:backgroundTint="@color/hintColor"
+                android:textSize="18sp"
+                android:inputType="textMultiLine"/>
+
+            <EditText
+                android:id="@+id/edit_text_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Content"
+                android:textColorHint="@color/hintColor"
+                android:textColor="@color/contentFont"
+                android:textSize="14sp"
+                android:backgroundTint="@android:color/transparent"
+                android:inputType="textMultiLine"/>
 
 
 
 
-</LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

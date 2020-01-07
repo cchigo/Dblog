@@ -58,4 +58,7 @@ dependencies {
 
     //SwipeMenuListView
     implementation 'com.baoyz.swipemenulistview:library:1.3.0'
+
+    //readmore textview
+    implementation 'com.borjabravo:readmoretextview:2.0.1'
 }

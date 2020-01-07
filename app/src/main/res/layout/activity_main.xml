@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mainBackground"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -18,10 +19,12 @@
         android:id="@+id/buttonAddBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:srcCompat="@drawable/ic_add"
+        app:srcCompat="@drawable/ic_add"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@color/buttons"
         android:clickable="true"
+        app:elevation="8dp"
         android:layout_gravity="bottom|right"/>
 
 
