@@ -10,6 +10,9 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_add_blog.*
+import kotlinx.android.synthetic.main.blog_item.*
+import java.text.DateFormat
+import java.util.*
 
 class AddBlogActivity : AppCompatActivity() {
 
@@ -27,6 +30,9 @@ class AddBlogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_blog)
 
 
+
+
+
         //to display close button
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
         //setTitle("Write a new blogpost")
@@ -40,19 +46,6 @@ class AddBlogActivity : AppCompatActivity() {
             title = "Write New Blog"
         }
 
-//        app_toolbar.setOnMenuItemClickListener{
-//            when(it.itemId){
-//                R.id.post_note ->{
-//                    postNote()
-//                    Toast.makeText(applicationContext, "posted", Toast.LENGTH_LONG).show()
-//                    true
-//                }
-//
-//
-//
-//            }
-//            true
-//        }
     }
 
     //specify menu for this activity

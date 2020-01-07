@@ -8,11 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dblog.R
 import com.example.dblog.data.Blog
+import kotlinx.android.synthetic.main.blog_item.*
 import kotlinx.android.synthetic.main.blog_item.view.*
+import java.text.DateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BlogAdapter : RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
     private var blogs: List<Blog> = ArrayList<Blog>()
     private var listener: OnItemClickListener? = null
+
     // private position : Int
     // private var listener: AdapterView.OnItemClickListener? = null
     //holds views in each recyclerview item
@@ -30,6 +35,16 @@ class BlogAdapter : RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
         holder.textViewTitle.text = currentBlog.title
         holder.textViewCategory.text = currentBlog.category
         holder.textViewContent.text = currentBlog.content
+
+
+        //adds current date to each blog
+        val calendar = Calendar.getInstance()
+        val currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime())
+
+
+        holder.textViewDate.setText(currentDate)
+
+
 
 
     }
@@ -67,6 +82,7 @@ class BlogAdapter : RecyclerView.Adapter<BlogAdapter.BlogHolder>() {
         var textViewTitle: TextView = itemView.text_view_title
         var textViewCategory: TextView = itemView.text_view_category
         var textViewContent: TextView = itemView.text_view_content
+        var textViewDate: TextView = itemView.current_date
 
 
     }
