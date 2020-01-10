@@ -17,6 +17,7 @@ import java.util.*
 class AddBlogActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
+
     //intent extra keys
     companion object {
         const val EXTRA_ID = "com.example.dblog.EXTRA_ID"
@@ -30,17 +31,14 @@ class AddBlogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_blog)
 
 
-
-
-
         //to display close button
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
         //setTitle("Write a new blogpost")
 
-        if(intent.hasExtra(EXTRA_ID)){
+        if (intent.hasExtra(EXTRA_ID)) {
             title = "Edit Blog"
-            edit_text_title.setText(intent.getStringExtra(EXTRA_TITLE))
-            edit_text_category.setText(intent.getStringExtra(EXTRA_CATEGORY))
+            edit_text_title.editText?.setText(intent.getStringExtra(EXTRA_TITLE))
+            edit_text_category.editText?.setText(intent.getStringExtra(EXTRA_CATEGORY))
             edit_text_content.setText(intent.getStringExtra(EXTRA_CONTENT))
         } else {
             title = "Write New Blog"
@@ -55,34 +53,32 @@ class AddBlogActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
+        return when (item.itemId) {
             R.id.post_note -> {
                 postNote()
                 true
             }
-            else ->  super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
 
+    private fun postNote() {
+        if (edit_text_category.editText?.text.toString().trim().isBlank() ||
+            edit_text_title.editText?.text.toString().trim().isBlank() ||
 
-
-
-    private fun postNote(){
-        if (edit_text_category.text.toString().trim().isBlank() ||
-            edit_text_title.text.toString().trim().isBlank() ||
-
-            edit_text_content.text.toString().trim().isBlank() ){
+            edit_text_content.text.toString().trim().isBlank()
+        ) {
 
             Toast.makeText(this, "You can not send an empty blogpost!", Toast.LENGTH_LONG).show()
             return
         }
         val data = Intent().apply {
-            putExtra(EXTRA_TITLE, edit_text_title.text.toString())
-            putExtra(EXTRA_CATEGORY, edit_text_category.text.toString())
+            putExtra(EXTRA_TITLE, edit_text_title.editText?.text.toString())
+            putExtra(EXTRA_CATEGORY, edit_text_category.editText?.text.toString())
             putExtra(EXTRA_CONTENT, edit_text_content.text.toString())
 
-            if (intent.getIntExtra(EXTRA_ID, -1) !=1){
+            if (intent.getIntExtra(EXTRA_ID, -1) != 1) {
                 putExtra(EXTRA_ID, intent.getIntExtra(EXTRA_ID, -1))
             }
 
@@ -90,7 +86,6 @@ class AddBlogActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK, data)
         finish()
     }
-
 
 
 }

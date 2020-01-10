@@ -27,9 +27,10 @@ class MainActivity : AppCompatActivity() {
         const val ADD_BLOG_REQUEST = 1
         const val EDIT_BLOG_REQUEST = 2
     }
+
     private lateinit var blogViewModel: BlogViewModel
     private lateinit var adapter: BlogAdapter
-    private lateinit var  viewHolder: RecyclerView.ViewHolder
+    private lateinit var viewHolder: RecyclerView.ViewHolder
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,32 +38,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //onClick listener tto launch add blog activity via floating action button to get input back
-        buttonAddBlog.setOnClickListener(object: View.OnClickListener {
-            override fun onClick(v:View) {
+        buttonAddBlog.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
                 val intent = Intent(this@MainActivity, AddBlogActivity::class.java)
                 startActivityForResult(intent, ADD_BLOG_REQUEST)
             }
         })
 
 
-
-
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        adapter  = BlogAdapter()
+        adapter = BlogAdapter()
         recyclerView.adapter = adapter
 
         //this references the viewmodel
         blogViewModel = ViewModelProviders.of(this).get(BlogViewModel::class.java)
 
-        blogViewModel.getAllBlogs().observe(this, object:Observer<List<Blog>> {
-            override fun onChanged(blogs:List<Blog>) {
+        blogViewModel.getAllBlogs().observe(this, object : Observer<List<Blog>> {
+            override fun onChanged(blogs: List<Blog>) {
                 adapter.setBlog(blogs)
             }
         })
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -77,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
         }).attachToRecyclerView(recycler_view)
 
-        adapter.setOnItemClickListener(object : BlogAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : BlogAdapter.OnItemClickListener {
             override fun onItemClick(blog: Blog) {
                 Toast.makeText(applicationContext, "${blog.id}", Toast.LENGTH_SHORT).show()
                 var intent = Intent(baseContext, AddBlogActivity::class.java)
@@ -92,30 +91,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.main_menu, menu)
-//        return true
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        return when (item?.itemId) {
-//            R.id.delete_all_blogs -> {
-//                blogViewModel.deleteAllBlogs()
-//                Toast.makeText(this, "All notes deleted!", Toast.LENGTH_SHORT).show()
-//                true
-//            }
-//            else -> {
-//                super.onOptionsItemSelected(item)
-//            }
-//        }
-//    }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         //inserts new post
-        if (requestCode == ADD_BLOG_REQUEST && resultCode == Activity.RESULT_OK){
+        if (requestCode == ADD_BLOG_REQUEST && resultCode == Activity.RESULT_OK) {
             val newBlog = Blog(
                 data!!.getStringExtra(AddBlogActivity.EXTRA_CATEGORY),
                 data.getStringExtra(AddBlogActivity.EXTRA_TITLE),
@@ -128,12 +109,10 @@ class MainActivity : AppCompatActivity() {
             //edits the blog
 
 
-        } else if(requestCode == EDIT_BLOG_REQUEST && resultCode == Activity.RESULT_OK){
+        } else if (requestCode == EDIT_BLOG_REQUEST && resultCode == Activity.RESULT_OK) {
             val id = data?.getIntExtra(AddBlogActivity.EXTRA_ID, 1)
 
-//           if(id == -1){
-//               Toast.makeText(this, "Could not update! Error!", Toast.LENGTH_SHORT).show()
-//            }
+
             val updateBlog = Blog(
                 data!!.getStringExtra(AddBlogActivity.EXTRA_CATEGORY),
                 data.getStringExtra(AddBlogActivity.EXTRA_TITLE),
@@ -142,20 +121,15 @@ class MainActivity : AppCompatActivity() {
             id?.let {
                 updateBlog.id = it
             }
-            Log.i("Blogid", "$id")
             Toast.makeText(applicationContext, "$id", Toast.LENGTH_SHORT).show()
 
             blogViewModel.update(updateBlog)
 
 
-
-
-        }else {
+        } else {
             Toast.makeText(this, "Article not saved", Toast.LENGTH_LONG).show()
         }
     }
-
-
 
 
 }
